@@ -2,6 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const Header = () => {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="relative bg-gray-950 border-b border-gray-800">
       {/* Navigation Bar */}
@@ -29,18 +36,30 @@ const Header = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hidden md:flex items-center space-x-8 text-sm"
           >
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            <button 
+              onClick={() => scrollToSection('investment-strategy')}
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            >
               Investment Strategies
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('performance-analysis')}
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            >
               Performance
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Research
-            </a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">
+            </button>
+            <button 
+              onClick={() => scrollToSection('live-tracker')}
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            >
+              Live Tracker
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            >
               Contact
-            </a>
+            </button>
           </motion.div>
         </div>
       </nav>
@@ -76,8 +95,8 @@ const Header = () => {
               High Risk. Higher Rewards. Zero Risk Management.
             </p>
             <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Advanced portfolio strategies for alternative digital assets. 
-              Professional-grade risk exposure with institutional-level degeneracy.
+              Live portfolio tracking with real-time PNL updates. 
+              Follow our degenerate investment journey with complete transparency.
             </p>
           </motion.div>
 
@@ -98,26 +117,26 @@ const Header = () => {
             </div>
             <div className="space-y-2">
               <div className="text-2xl md:text-3xl font-bold text-white">
-                $69.4M
+                $69.4K
               </div>
               <div className="text-sm text-gray-400 uppercase tracking-wide">
-                AUM
+                Live Portfolio
               </div>
             </div>
             <div className="space-y-2">
               <div className="text-2xl md:text-3xl font-bold text-accent-magenta">
-                10+
+                Daily
               </div>
               <div className="text-sm text-gray-400 uppercase tracking-wide">
-                Assets
+                PNL Updates
               </div>
             </div>
             <div className="space-y-2">
               <div className="text-2xl md:text-3xl font-bold text-accent-purple">
-                MAX
+                100%
               </div>
               <div className="text-sm text-gray-400 uppercase tracking-wide">
-                Volatility
+                Transparency
               </div>
             </div>
           </motion.div>
@@ -129,8 +148,8 @@ const Header = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="text-xs text-gray-500 pt-8"
           >
-            *Past performance does not guarantee future results. 
-            High volatility investment strategy. Professional supervision recommended.
+            *Live trading results. Real money. Real losses. 
+            Follow along for educational entertainment purposes.
           </motion.p>
         </div>
       </div>

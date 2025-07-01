@@ -10,7 +10,7 @@ import CallToAction from './components/CallToAction';
 import { portfolioData } from './data/portfolioData';
 
 function App() {
-  const [selectedProfile, setSelectedProfile] = useState('Degen');
+  const [selectedProfile, setSelectedProfile] = useState('Low Risk');
 
   const currentData = portfolioData[selectedProfile];
 
@@ -42,6 +42,7 @@ function App() {
       <main className="container mx-auto px-6 py-16 space-y-20">
         {/* Investment Strategy Selector */}
         <motion.section
+          id="investment-strategy"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -103,6 +104,7 @@ function App() {
 
         {/* Performance Metrics */}
         <motion.section
+          id="performance-analysis"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
