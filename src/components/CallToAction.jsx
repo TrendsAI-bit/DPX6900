@@ -151,17 +151,17 @@ const CallToAction = () => {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-white mb-2">
-              How Live Tracking Works
+              X Community & Trading Chats
             </h3>
             <p className="text-gray-400">
-              Full transparency into our degen investment journey
+              Exclusive access for holders with live trading insights
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-primary-900/30 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-2xl">💰</span>
+                <div className="w-8 h-8 bg-primary-400 rounded-full"></div>
               </div>
               <h4 className="text-lg font-semibold text-white">
                 Real Money Invested
@@ -173,25 +173,25 @@ const CallToAction = () => {
             
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-accent-magenta/20 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-2xl">📊</span>
+                <div className="w-8 h-8 bg-accent-magenta rounded-full"></div>
               </div>
               <h4 className="text-lg font-semibold text-white">
-                Daily PNL Reports
+                X Community Access
               </h4>
               <p className="text-gray-400 text-sm">
-                Every day we update our portfolio performance with complete honesty about gains and losses.
+                Join our exclusive X community for real-time market discussions and trading insights.
               </p>
             </div>
             
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-accent-cyan/20 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-2xl">👁️</span>
+                <div className="w-8 h-8 bg-accent-cyan rounded-full"></div>
               </div>
               <h4 className="text-lg font-semibold text-white">
-                Complete Transparency
+                Holder Exclusive Trading Chats
               </h4>
               <p className="text-gray-400 text-sm">
-                Follow every trade decision, market reaction, and inevitable emotional breakdown.
+                Verified holders get access to exclusive trading channels with live trade calls and market analysis.
               </p>
             </div>
           </div>
