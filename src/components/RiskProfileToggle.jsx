@@ -5,76 +5,101 @@ const RiskProfileToggle = ({ selectedProfile, onProfileChange }) => {
   const profiles = [
     {
       name: 'Low Risk',
-      label: 'Low Risk',
-      description: 'For the cautious souls',
-      color: 'from-low-risk-500 to-low-risk-600',
-      textColor: 'text-white',
-      glow: 'shadow-green-500/50'
+      label: 'Conservative',
+      subtitle: 'Low Risk',
+      description: 'Stable, diversified portfolio with reduced volatility',
+      riskLevel: 'Low',
+      expectedReturn: '15-25%',
+      color: 'border-primary-600 bg-primary-900/20',
+      activeColor: 'border-primary-400 bg-primary-900/40',
+      textColor: 'text-primary-400'
     },
     {
       name: 'Risky',
-      label: 'Risky',
-      description: 'Some spice, some dice',
-      color: 'from-risky-500 to-risky-600', 
-      textColor: 'text-white',
-      glow: 'shadow-orange-500/50'
+      label: 'Aggressive',
+      subtitle: 'Risky', 
+      description: 'High-growth potential with moderate risk exposure',
+      riskLevel: 'Medium',
+      expectedReturn: '50-150%',
+      color: 'border-orange-600 bg-orange-900/20',
+      activeColor: 'border-orange-400 bg-orange-900/40',
+      textColor: 'text-orange-400'
     },
     {
       name: 'Degen',
-      label: 'Degen',
-      description: 'Full send or no send',
-      color: 'from-degen-500 to-degen-700',
-      textColor: 'text-white',
-      glow: 'shadow-pink-500/50'
+      label: 'Maximum Risk',
+      subtitle: 'Degen',
+      description: 'Ultra-high volatility with extreme return potential',
+      riskLevel: 'Extreme',
+      expectedReturn: '200-1000%',
+      color: 'border-accent-magenta bg-pink-900/20',
+      activeColor: 'border-accent-magenta bg-pink-900/40',
+      textColor: 'text-accent-magenta'
     }
   ];
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 justify-center items-center max-w-4xl mx-auto">
+    <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
       {profiles.map((profile) => (
         <motion.button
           key={profile.name}
           onClick={() => onProfileChange(profile.name)}
           className={`
-            risk-button relative px-8 py-6 rounded-xl font-bold text-lg
-            bg-gradient-to-r ${profile.color} ${profile.textColor}
-            transition-all duration-300 transform hover:scale-105
+            professional-button text-left p-6 rounded-xl transition-all duration-300
             ${selectedProfile === profile.name 
-              ? `risk-button-active shadow-2xl ${profile.glow} ring-4 ring-white/20` 
-              : 'hover:shadow-lg'
+              ? `${profile.activeColor} shadow-lg` 
+              : `${profile.color} hover:bg-gray-800/50`
             }
-            min-w-[200px] border-2 border-white/20
+            border-2 min-h-[180px] flex flex-col justify-between
           `}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          animate={selectedProfile === profile.name ? {
-            boxShadow: [
-              '0 0 20px rgba(255, 255, 255, 0.3)',
-              '0 0 40px rgba(255, 255, 255, 0.5)',
-              '0 0 20px rgba(255, 255, 255, 0.3)'
-            ]
-          } : {}}
-          transition={{
-            boxShadow: {
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: profiles.indexOf(profile) * 0.1 }}
         >
-          <div className="text-center">
-            <div className="text-xl font-black">{profile.label}</div>
-            <div className="text-sm opacity-90 mt-1">{profile.description}</div>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-white">
+                  {profile.label}
+                </h3>
+                <p className={`text-sm font-medium ${profile.textColor}`}>
+                  {profile.subtitle}
+                </p>
+              </div>
+              <div className={`
+                w-4 h-4 rounded-full border-2 transition-all duration-300
+                ${selectedProfile === profile.name 
+                  ? `${profile.textColor.replace('text-', 'bg-')} border-transparent` 
+                  : 'border-gray-600'
+                }
+              `} />
+            </div>
+            
+            <p className="text-sm text-gray-400 leading-relaxed">
+              {profile.description}
+            </p>
           </div>
           
-          {selectedProfile === profile.name && (
-            <motion.div
-              className="absolute inset-0 rounded-xl border-2 border-white/40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-          )}
+          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-700/50">
+            <div>
+              <div className="text-xs text-gray-500 uppercase tracking-wide">
+                Risk Level
+              </div>
+              <div className={`text-sm font-medium ${profile.textColor}`}>
+                {profile.riskLevel}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs text-gray-500 uppercase tracking-wide">
+                Expected Return
+              </div>
+              <div className="text-sm font-medium text-white">
+                {profile.expectedReturn}
+              </div>
+            </div>
+          </div>
         </motion.button>
       ))}
     </div>
