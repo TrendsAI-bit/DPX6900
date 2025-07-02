@@ -38,7 +38,7 @@ const CallToAction = () => {
             className="pt-8"
           >
             <motion.a
-              href="https://pump.fun/"
+              href="https://pump.fun/coin/4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-12 py-6 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold text-xl rounded-lg shadow-xl hover:from-primary-500 hover:to-primary-400 transition-all duration-300"
@@ -48,7 +48,7 @@ const CallToAction = () => {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Follow Live Portfolio</span>
+              <span>Trade DPX6900 Now</span>
               <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -249,9 +249,14 @@ const CallToAction = () => {
             <button className="px-6 py-3 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-800 transition-colors">
               Join Discord
             </button>
-            <button className="px-6 py-3 border border-primary-600 text-primary-400 rounded-lg hover:bg-primary-900/20 transition-colors">
-              Watch Live Stream
-            </button>
+            <a 
+              href="https://pump.fun/coin/4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 border border-primary-600 text-primary-400 rounded-lg hover:bg-primary-900/20 transition-colors"
+            >
+              Trade on Pump.fun
+            </a>
           </div>
         </motion.div>
 

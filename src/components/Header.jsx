@@ -98,6 +98,40 @@ const Header = () => {
               Live portfolio tracking with real-time PNL updates. 
               Follow our degenerate investment journey with complete transparency.
             </p>
+            
+            {/* Contract Address */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="pt-6"
+            >
+              <div className="max-w-md mx-auto">
+                <div className="text-sm text-gray-400 mb-2 uppercase tracking-wide">
+                  Contract Address (CA)
+                </div>
+                <div className="bg-gray-900/50 border border-primary-600/50 rounded-lg p-4 flex items-center justify-between">
+                  <div className="font-mono text-primary-400 text-sm md:text-base break-all">
+                    4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump
+                  </div>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText('4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump');
+                      // You could add a toast notification here
+                    }}
+                    className="ml-3 p-2 bg-primary-600 hover:bg-primary-500 rounded-md transition-colors flex-shrink-0"
+                    title="Copy Contract Address"
+                  >
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="text-xs text-gray-500 mt-2 text-center">
+                  Click to copy • Current Market Cap: $7,992
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Key Metrics */}
