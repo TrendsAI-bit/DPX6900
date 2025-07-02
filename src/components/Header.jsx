@@ -9,6 +9,7 @@ const Header = () => {
     loading: true,
     error: null,
     lastUpdated: null,
+    source: null,
   });
 
   const [copySuccess, setCopySuccess] = useState(false);
@@ -32,6 +33,7 @@ const Header = () => {
         loading: false,
         error: data.error || null,
         lastUpdated: data.lastUpdated,
+        source: data.source || null,
       });
     } catch (error) {
       console.error('Failed to fetch market data:', error);
@@ -233,8 +235,14 @@ const Header = () => {
                     )}
                   </div>
                   {marketData.lastUpdated && !marketData.loading && (
-                    <div className="text-gray-600">
-                      Updated: {new Date(marketData.lastUpdated).toLocaleTimeString()}
+                    <div className="text-gray-600 flex items-center justify-center space-x-2">
+                      <span>Updated: {new Date(marketData.lastUpdated).toLocaleTimeString()}</span>
+                      {marketData.source && (
+                        <>
+                          <span>•</span>
+                          <span className="text-xs">via {marketData.source}</span>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
