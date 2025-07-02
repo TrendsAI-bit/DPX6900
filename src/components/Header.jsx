@@ -242,9 +242,11 @@ const Header = () => {
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="flex items-center space-x-2 mb-2">
-                          <svg className="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                          </svg>
+                          <img 
+                            src="/asset/logo.png" 
+                            alt="DPX6900" 
+                            className="w-5 h-5"
+                          />
                           <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">
                             Market Cap
                           </span>
@@ -272,9 +274,11 @@ const Header = () => {
                       </div>
                       {!marketData.loading && !marketData.error && (
                         <div className="text-primary-400 opacity-70">
-                          <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7v10c0 5.55 3.84 9.739 9 11 5.16-1.261 9-5.45 9-11V7l-10-5z"/>
-                          </svg>
+                          <img 
+                            src="/asset/logo.png" 
+                            alt="DPX6900" 
+                            className="w-8 h-8 opacity-70"
+                          />
                         </div>
                       )}
                     </div>
