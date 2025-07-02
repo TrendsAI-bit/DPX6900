@@ -220,7 +220,11 @@ const Header = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.7 }}
-                    className="bg-gradient-to-r from-primary-900/20 to-primary-800/20 border border-primary-600/30 rounded-xl p-6 backdrop-blur-sm"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 10px 30px rgba(16, 185, 129, 0.2)"
+                    }}
+                    className="bg-gradient-to-r from-primary-900/20 to-primary-800/20 border border-primary-600/30 rounded-xl p-6 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-primary-500/50"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -268,7 +272,11 @@ const Header = () => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.8 }}
-                    className="bg-gradient-to-r from-accent-magenta/10 to-accent-purple/10 border border-accent-magenta/30 rounded-xl p-6 backdrop-blur-sm"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 10px 30px rgba(236, 72, 153, 0.2)"
+                    }}
+                    className="bg-gradient-to-r from-accent-magenta/10 to-accent-purple/10 border border-accent-magenta/30 rounded-xl p-6 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-accent-magenta/50"
                   >
                     <div className="flex items-center justify-between">
                       <div>
