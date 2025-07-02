@@ -1,12 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { getMarketData } from '../utils/heliusApi';
 
 const Header = () => {
+  const [marketData, setMarketData] = useState({
+    marketCap: 7992, // Default fallback value
+    price: null,
+    loading: true,
+    error: null,
+    lastUpdated: null,
+  });
+
+  const [copySuccess, setCopySuccess] = useState(false);
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const fetchData = async () => {
+    try {
+      setMarketData(prev => ({ ...prev, loading: true, error: null }));
+      const data = await getMarketData();
+      setMarketData({
+        marketCap: data.marketCap || 7992,
+        price: data.price,
+        supply: data.supply,
+        volume24h: data.volume24h,
+        loading: false,
+        error: data.error || null,
+        lastUpdated: data.lastUpdated,
+      });
+    } catch (error) {
+      console.error('Failed to fetch market data:', error);
+      setMarketData(prev => ({
+        ...prev,
+        loading: false,
+        error: 'Failed to fetch live data',
+      }));
+    }
+  };
+
+  useEffect(() => {
+    // Fetch immediately on mount
+    fetchData();
+
+    // Set up periodic updates every 30 seconds
+    const interval = setInterval(fetchData, 30000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleCopyAddress = async () => {
+    try {
+      await navigator.clipboard.writeText('4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump');
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy:', error);
+    }
+  };
+
+  const formatMarketCap = (value) => {
+    if (!value) return 'Loading...';
+    if (value >= 1000000) {
+      return `$${(value / 1000000).toFixed(2)}M`;
+    } else if (value >= 1000) {
+      return `$${(value / 1000).toFixed(1)}K`;
+    }
+    return `$${value.toLocaleString()}`;
+  };
+
+  const formatPrice = (value) => {
+    if (!value) return null;
+    if (value < 0.01) {
+      return `$${value.toFixed(6)}`;
+    }
+    return `$${value.toFixed(4)}`;
   };
 
   return (
@@ -115,20 +188,55 @@ const Header = () => {
                     4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump
                   </div>
                   <button
-                    onClick={() => {
-                      navigator.clipboard.writeText('4Zxwp6FmjFXBSKE7wNZPT8V5WdfMTEAhpqnEqBvDpump');
-                      // You could add a toast notification here
-                    }}
-                    className="ml-3 p-2 bg-primary-600 hover:bg-primary-500 rounded-md transition-colors flex-shrink-0"
-                    title="Copy Contract Address"
+                    onClick={handleCopyAddress}
+                    className={`ml-3 p-2 rounded-md transition-all duration-200 flex-shrink-0 ${
+                      copySuccess 
+                        ? 'bg-green-600 hover:bg-green-500' 
+                        : 'bg-primary-600 hover:bg-primary-500'
+                    }`}
+                    title={copySuccess ? 'Copied!' : 'Copy Contract Address'}
                   >
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
+                    {copySuccess ? (
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    )}
                   </button>
                 </div>
-                <div className="text-xs text-gray-500 mt-2 text-center">
-                  Click to copy • Current Market Cap: $7,992
+                <div className="text-xs text-gray-500 mt-2 text-center space-y-1">
+                  <div className="flex items-center justify-center space-x-4">
+                    <span>
+                      Market Cap: {marketData.loading ? (
+                        <span className="inline-flex items-center">
+                          <svg className="animate-spin h-3 w-3 mr-1" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Loading...
+                        </span>
+                      ) : (
+                        <span className={marketData.error ? 'text-orange-400' : 'text-primary-400'}>
+                          {formatMarketCap(marketData.marketCap)}
+                          {marketData.error && ' (cached)'}
+                        </span>
+                      )}
+                    </span>
+                    {marketData.price && (
+                      <>
+                        <span className="text-gray-600">•</span>
+                        <span>Price: <span className="text-primary-400">{formatPrice(marketData.price)}</span></span>
+                      </>
+                    )}
+                  </div>
+                  {marketData.lastUpdated && !marketData.loading && (
+                    <div className="text-gray-600">
+                      Updated: {new Date(marketData.lastUpdated).toLocaleTimeString()}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
