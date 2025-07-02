@@ -174,18 +174,6 @@ const Header = () => {
               Follow our degenerate investment journey with complete transparency.
             </p>
             
-            {/* Believe in Degen Tagline */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="pt-2"
-            >
-              <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-accent-magenta via-accent-purple to-accent-cyan bg-clip-text text-transparent">
-                Believe in Degen
-              </div>
-            </motion.div>
-
             {/* Contract Address */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -435,7 +423,7 @@ const Header = () => {
                               </div>
                             </div>
                             
-                            <div className="text-center relative">
+                            <div className="text-center">
                               <motion.div 
                                 className="text-3xl md:text-4xl font-bold text-accent-cyan"
                                 animate={{ 
@@ -458,21 +446,6 @@ const Header = () => {
                               </motion.div>
                               <div className="text-xs text-gray-400 mt-1">
                                 Value @ $10M Market Cap
-                              </div>
-                              <div className="absolute -top-2 -right-2">
-                                <motion.div 
-                                  className="text-xl"
-                                  animate={{ 
-                                    rotate: [0, 15, -15, 0],
-                                  }}
-                                  transition={{ 
-                                    duration: 1.5,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                  }}
-                                >
-                                  🚀
-                                </motion.div>
                               </div>
                             </div>
                             
