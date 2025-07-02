@@ -174,6 +174,18 @@ const Header = () => {
               Follow our degenerate investment journey with complete transparency.
             </p>
             
+            {/* Believe in Degen Tagline */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="pt-2"
+            >
+              <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-accent-magenta via-accent-purple to-accent-cyan bg-clip-text text-transparent">
+                Believe in Degen
+              </div>
+            </motion.div>
+
             {/* Contract Address */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -354,6 +366,135 @@ const Header = () => {
                     </div>
                   </motion.div>
                 </div>
+
+                {/* Investment Potential Calculator */}
+                {marketData.price && marketData.marketCap && !marketData.loading && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 1.0 }}
+                    whileHover={{ 
+                      scale: 1.01,
+                      boxShadow: "0 10px 30px rgba(34, 211, 238, 0.15)"
+                    }}
+                    className="bg-gradient-to-r from-accent-cyan/10 via-accent-purple/10 to-accent-magenta/10 border border-accent-cyan/30 rounded-xl p-6 backdrop-blur-sm cursor-pointer transition-all duration-300 hover:border-accent-cyan/50"
+                  >
+                    <div className="text-center space-y-4">
+                      <div className="flex items-center justify-center space-x-2 mb-3">
+                        <motion.svg 
+                          className="w-5 h-5 text-accent-cyan" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                          animate={{ 
+                            rotate: [0, 10, -10, 0],
+                            scale: [1, 1.1, 1]
+                          }}
+                          transition={{ 
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                          }}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </motion.svg>
+                        <span className="text-sm font-medium text-gray-400 uppercase tracking-wide">
+                          1 SOL → $10M Market Cap
+                        </span>
+                      </div>
+                      
+                      {(() => {
+                        const solPrice = 200; // Approximate SOL price in USD
+                        const currentMarketCap = marketData.marketCap;
+                        const currentTokenPrice = marketData.price;
+                        const targetMarketCap = 10000000; // $10M
+                        
+                        // Calculate tokens you can buy with 1 SOL
+                        const tokensFromOneSol = solPrice / currentTokenPrice;
+                        
+                        // Calculate new token price at $10M market cap
+                        // We need to estimate total supply from current market cap and price
+                        const estimatedSupply = currentMarketCap / currentTokenPrice;
+                        const newTokenPrice = targetMarketCap / estimatedSupply;
+                        
+                        // Calculate value of your tokens at $10M market cap
+                        const futureValue = tokensFromOneSol * newTokenPrice;
+                        const multiplier = futureValue / solPrice;
+                        
+                        return (
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="text-center">
+                              <div className="text-lg font-bold text-white mb-1">
+                                {tokensFromOneSol > 1000000 
+                                  ? `${(tokensFromOneSol / 1000000).toFixed(1)}M`
+                                  : tokensFromOneSol.toLocaleString(undefined, { maximumFractionDigits: 0 })
+                                }
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Tokens with 1 SOL
+                              </div>
+                            </div>
+                            
+                            <div className="text-center relative">
+                              <motion.div 
+                                className="text-3xl md:text-4xl font-bold text-accent-cyan"
+                                animate={{ 
+                                  textShadow: [
+                                    "0 0 10px rgba(34, 211, 238, 0.5)",
+                                    "0 0 20px rgba(34, 211, 238, 0.8)",
+                                    "0 0 10px rgba(34, 211, 238, 0.5)"
+                                  ]
+                                }}
+                                transition={{ 
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  ease: "easeInOut"
+                                }}
+                              >
+                                ${futureValue > 1000 
+                                  ? `${(futureValue / 1000).toFixed(0)}K` 
+                                  : futureValue.toLocaleString(undefined, { maximumFractionDigits: 0 })
+                                }
+                              </motion.div>
+                              <div className="text-xs text-gray-400 mt-1">
+                                Value @ $10M Market Cap
+                              </div>
+                              <div className="absolute -top-2 -right-2">
+                                <motion.div 
+                                  className="text-xl"
+                                  animate={{ 
+                                    rotate: [0, 15, -15, 0],
+                                  }}
+                                  transition={{ 
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                  }}
+                                >
+                                  🚀
+                                </motion.div>
+                              </div>
+                            </div>
+                            
+                            <div className="text-center">
+                              <div className="text-xl font-bold text-accent-magenta">
+                                {multiplier < 1000 ? `${multiplier.toFixed(1)}x` : `${(multiplier/1000).toFixed(1)}Kx`}
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Potential Return
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
+                      
+                      <div className="text-xs text-gray-500 pt-2 border-t border-gray-700/50">
+                        *Hypothetical calculation based on current market cap reaching $10M. 
+                        Not financial advice. DYOR.
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
 
                 {/* Status Bar */}
                 {marketData.lastUpdated && !marketData.loading && (
